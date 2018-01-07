@@ -1,4 +1,4 @@
-alert("connected");
+//alert("connected");
 
 
     // Initialize Firebase
