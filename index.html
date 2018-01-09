@@ -32,41 +32,20 @@
                 <div class="row">
                     
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                        <input id="txtEmail" type="email" placeholder="Email">
                         
-                    <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
-                    
-                        <!-- Container for the demo -->
-                        <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-                            <div class="mdl-card__title mdl-color--light-blue-600 mdl-color-text--white">
-                                <h2 class="mdl-card__title-text">Firebase Email &amp; Password Authentication</h2>
-                            </div>
-                            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                                <p>Enter an email and password below and either sign in to an existing account or sign up</p>
-                    
-                                <input class="mdl-textfield__input" style="display:inline;width:auto;" type="text" id="email" name="email" placeholder="Email"
-                                /> &nbsp;&nbsp;&nbsp;
-                                <input class="mdl-textfield__input" style="display:inline;width:auto;" type="password" id="password" name="password" placeholder="Password"
-                                />
-                                <br/>
-                                <br/>
-                                <button disabled class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-in" name="signin">Sign In</button>
-                                &nbsp;&nbsp;&nbsp;
-                                <button class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-up" name="signup">Sign Up</button>
-                                &nbsp;&nbsp;&nbsp;
-                                <button class="mdl-button mdl-js-button mdl-button--raised" disabled id="quickstart-verify-email" name="verify-email">Send Email Verification</button>
-                                &nbsp;&nbsp;&nbsp;
-                                <button class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-password-reset" name="verify-email">Send Password Reset Email</button>
-                    
-                                <!-- Container where we'll display the user details -->
-                                <div class="quickstart-user-details-container">
-                                    Firebase sign-in status:
-                                    <span id="quickstart-sign-in-status">Unknown</span>
-                                    <div>Firebase auth
-                                        <code>currentUser</code> object value:</div>
-                                    <pre><code id="quickstart-account-details">null</code></pre>
-                                </div>
-                            </div>
-                        </div>
+                        <input id="txtPassword" type="password" placeholder="Password">
+                
+                        <button id="btnLogin" type="button" class="btn btn-success">Login</button>
+                        
+                        <button id="btnSignUp" type="button" class="btn btn-large btn-info">Sign Up</button>
+
+                        <button id="btnLogout" type="button" class="btn btn-large btn-danger hide">Log Out</button>
+                        
+                        
+                        
+                        
                     
                     </div>
                         </div>
@@ -81,7 +60,7 @@
         <!-- Bootstrap JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-        <script src="assets/javascript/app.js"></script>
+        <script src="assets/javascript/app2.js"></script>
 
     </body>
 </html>

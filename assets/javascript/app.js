@@ -12,7 +12,10 @@
     };
     firebase.initializeApp(config);
 
-    var users =[];
+    var database = firebase.database();
+    var userScore = 0;
+    var userWins  = 0;
+    var userLoses = 0;
 
 
     function toggleSignIn() {
@@ -64,6 +67,11 @@
         if (password.length < 4) {
             alert('Please enter a password.');
             return;
+        }else{
+                firebase.database().ref('users/' + userId).set({
+                    email: email,
+                });
+            }
         }
         // Sign in with email and pass.
         // [START createwithemail]
@@ -82,19 +90,7 @@
         });
         // [END createwithemail]
     }
-    /**
-     * Sends an email verification to the user.
-     */
-    function sendEmailVerification() {
-        // [START sendemailverification]
-        firebase.auth().currentUser.sendEmailVerification().then(function () {
-            // Email Verification sent!
-            // [START_EXCLUDE]
-            alert('Email Verification Sent!');
-            // [END_EXCLUDE]
-        });
-        // [END sendemailverification]
-    }
+    
     function sendPasswordReset() {
         var email = document.getElementById('email').value;
         // [START sendpasswordemail]
@@ -139,6 +135,9 @@
                 var isAnonymous = user.isAnonymous;
                 var uid = user.uid;
                 var providerData = user.providerData;
+                
+                
+                
                 // [START_EXCLUDE]
                 document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
                 document.getElementById('quickstart-sign-in').textContent = 'Sign out';
@@ -162,9 +161,9 @@
         // [END authstatelistener]
         document.getElementById('quickstart-sign-in').addEventListener('click', toggleSignIn, false);
         document.getElementById('quickstart-sign-up').addEventListener('click', handleSignUp, false);
-        document.getElementById('quickstart-verify-email').addEventListener('click', sendEmailVerification, false);
         document.getElementById('quickstart-password-reset').addEventListener('click', sendPasswordReset, false);
     }
     window.onload = function () {
         initApp();
+    
     };
