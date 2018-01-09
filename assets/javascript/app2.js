@@ -34,6 +34,16 @@
             var errorCode = error.code;
             var errorMessage = error.message;
             // ...
+            if (errorCode == 'auth/invalid-email') {
+                alert(errorMessage);
+            } else if (errorCode == 'auth/user-not-found') {
+                alert(errorMessage);
+            }
+            if (errorCode === 'auth/wrong-password') {
+                alert('Wrong password.');
+            } else {
+                alert(errorMessage);
+            }
         });
     });
 
@@ -48,16 +58,23 @@
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            // [START_EXCLUDE]
+            
         });
     });
+
+    //add logout function
+    btnLogout.on("click", e=>{
+        firebase.auth().signOut();
+    })
 
     //add signin sign out event listener
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser) {
             console.log(firebaseUser);
+            btnLogout.removeClass("hide");
         } else {
             console.log("not logged in");
+            btnLogout.addClass("hide");
         }
     });
 
