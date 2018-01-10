@@ -57,13 +57,20 @@
         firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
-            var errorMessage = error.message;
-            
+            var errorMessage = error.message;  
         });
+        //store user to database
+        database.ref().push({
+            user: email,
+            wins : 0,
+            loses: 0
+        });
+            
     });
+    
 
     //add logout function
-    btnLogout.on("click", e=>{
+    btnLogout.on("click", e =>{
         firebase.auth().signOut();
     })
 
