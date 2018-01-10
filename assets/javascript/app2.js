@@ -13,6 +13,10 @@
     firebase.initializeApp(config);
 
     var database = firebase.database();
+    var choices =["r","p","s"];
+    var guess;
+    var wins;
+    var losses;
 
     //match with html lgoin elements
     const txtEmail = $("#txtEmail");
@@ -20,6 +24,9 @@
     const btnLogin = $("#btnLogin");
     const btnSignUp = $("#btnSignUp");
     const btnLogout = $("#btnLogout");
+    const btnRock = $("#btnRock");
+    const btnPaper =$("#btnPaper");
+    const btnScissors = $("#btnScissors");
 
 
     //add login onclick event
@@ -79,11 +86,41 @@
         if (firebaseUser) {
             console.log(firebaseUser);
             btnLogout.removeClass("hide");
+            btnRock.removeClass("hide");
+            btnPaper.removeClass("hide");
+            btnScissors.removeClass("hide");
+            txtEmail.addClass("hide");
+            txtPassword.addClass("hide");
+            btnLogin.addClass("hide");
+            btnSignUp.addClass("hide");
         } else {
             console.log("not logged in");
             btnLogout.addClass("hide");
+            btnLogout.addClass("hide");
+            btnRock.addClass("hide");
+            btnPaper.addClass("hide");
+            btnScissors.addClass("hide");
+            txtEmail.removeClass("hide");
+            txtPassword.removeClass("hide");
+            btnLogin.removeClass("hide"); 
+            btnSignUp.removeClass("hide");
         }
     });
+
+    btnRock.on("click", function () {
+        guess = "r";
+        console.log("rock");
+    })
+
+    btnPaper.on("click", function () {
+        guess = "p";
+        console.log("paper");
+    })
+
+    btnScissors.on("click", function () {
+        guess = "s";
+        console.log("scissors");
+    })
 
 }());
 
