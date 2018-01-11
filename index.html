@@ -25,7 +25,7 @@
                             <input id="txtEmail" type="email" placeholder="Email">
                             <input id="txtPassword" type="password" placeholder="Password">
                             <button id="btnLogin" type="button" class="btn btn-success">Login</button>
-                            <button id="btnSignUp" type="button" class="btn btn-large btn-info">Sign Up</button>
+                            <button id="btnSignUp" type="button" class="btn btn-large btn-default">Sign Up</button>
                             <button id="btnLogout" type="button" class="btn btn-large btn-danger hide">Log Out</button>
                         </div>
                     </div>
@@ -36,14 +36,18 @@
                         <img class="herobox" src="assets/images/paper1.jpeg" alt="crumpled paper">
                         <img class="herobox" src="assets/images/scissors1.jpeg" alt="scissors">
                     </div>
-                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                        <div class="well well-lg">                 
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                        <div class="well well-lg hide">                 
                         </div>
                     </div>
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <img class="herobox" src="assets/images/rock1.jpeg" alt="round rock">
-                        <img class="herobox" src="assets/images/paper1.jpeg" alt="crumpled paper">
-                        <img class="herobox" src="assets/images/scissors1.jpeg" alt="scissors">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        
+                        <div id="listWell" class="well hide">
+                            <h4 class="text-center">Current Players</h4>
+                            <div class="playersList"></div>
+                            <button class='btn btn-info'>CPU</button>
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="row">

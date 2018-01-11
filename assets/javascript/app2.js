@@ -84,7 +84,9 @@
     //add signin sign out event listener
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser) {
-            console.log(firebaseUser);
+            $(".playersList").append("<button class='btn btn-info player'>");
+            $(".player").html(firebaseUser.email);
+            $("#listWell").removeClass("hide");
             btnLogout.removeClass("hide");
             btnRock.removeClass("hide");
             btnPaper.removeClass("hide");
@@ -100,6 +102,7 @@
             console.log(currentPlayers);
         } else {
             console.log("not logged in");
+            $("#listWell").addClass("hide");
             btnLogout.addClass("hide");
             btnLogout.addClass("hide");
             btnRock.addClass("hide");

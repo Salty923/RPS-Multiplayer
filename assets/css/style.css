@@ -26,3 +26,12 @@ button{
 input{
     margin-top: 25px;
 }
+
+.player{
+    width: 90%;
+    margin: 10px auto;
+}
+
+.btn-info{
+    width:90%;
+}
