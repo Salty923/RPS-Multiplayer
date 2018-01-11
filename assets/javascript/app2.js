@@ -17,6 +17,7 @@
     var guess;
     var wins;
     var losses;
+    var currentPlayers =[];
 
     //match with html lgoin elements
     const txtEmail = $("#txtEmail");
@@ -27,6 +28,7 @@
     const btnRock = $("#btnRock");
     const btnPaper =$("#btnPaper");
     const btnScissors = $("#btnScissors");
+
 
 
     //add login onclick event
@@ -46,11 +48,6 @@
             } else if (errorCode == 'auth/user-not-found') {
                 alert(errorMessage);
             }
-            if (errorCode === 'auth/wrong-password') {
-                alert('Wrong password.');
-            } else {
-                alert(errorMessage);
-            }
         });
     });
 
@@ -67,7 +64,7 @@
             var errorMessage = error.message;  
         });
         //store user to database
-        database.ref().push({
+        database.ref("users").push({
             user: email,
             wins : 0,
             loses: 0
@@ -93,6 +90,8 @@
             txtPassword.addClass("hide");
             btnLogin.addClass("hide");
             btnSignUp.addClass("hide");
+            currentPlayers.push(firebaseUser.email);
+            console.log(currentPlayers);
         } else {
             console.log("not logged in");
             btnLogout.addClass("hide");
