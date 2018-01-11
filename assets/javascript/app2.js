@@ -17,7 +17,9 @@
     var guess;
     var wins;
     var losses;
-    var currentPlayers =[];
+    var player1;
+    var player2;
+    var currentPlayers =["CPU"];
 
     //match with html lgoin elements
     const txtEmail = $("#txtEmail");
@@ -36,9 +38,10 @@
 
     //add login onclick event
     btnLogin.on("click", e => {
+        event.preventDefault();
         //get email and password
-        const email = txtEmail.val();
-        const pass = txtPassword.val();
+        const email = txtEmail.val().trim();
+        const pass = txtPassword.val().trim();
         const auth = firebase.auth();
         //sign in
         firebase.auth().signInWithEmailAndPassword(email, pass).catch(function (error) {
@@ -56,9 +59,10 @@
 
     //sign up with onclick event
     btnSignUp.on("click", e => {
+        event.preventDefault();
         //get email and password
-        const email = txtEmail.val();
-        const pass = txtPassword.val();
+        const email = txtEmail.val().trim();
+        const pass = txtPassword.val().trim();
         const auth = firebase.auth();
         //sign up
         firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function (error) {
@@ -70,7 +74,7 @@
         database.ref("users").push({
             user: email,
             wins : 0,
-            loses: 0
+            loses: 0,
         });
             
     });
@@ -87,30 +91,18 @@
             $(".playersList").append("<button class='btn btn-info player'>");
             $(".player").html(firebaseUser.email);
             $("#listWell").removeClass("hide");
-            btnLogout.removeClass("hide");
-            btnRock.removeClass("hide");
-            btnPaper.removeClass("hide");
-            btnScissors.removeClass("hide");
-            btnRock2.removeClass("hide");
-            btnPaper2.removeClass("hide");
-            btnScissors2.removeClass("hide");
             txtEmail.addClass("hide");
             txtPassword.addClass("hide");
             btnLogin.addClass("hide");
             btnSignUp.addClass("hide");
             currentPlayers.push(firebaseUser.email);
             console.log(currentPlayers);
+            gameStart();
         } else {
             console.log("not logged in");
             $("#listWell").addClass("hide");
             btnLogout.addClass("hide");
             btnLogout.addClass("hide");
-            btnRock.addClass("hide");
-            btnPaper.addClass("hide");
-            btnScissors.addClass("hide");
-            btnRock2.addClass("hide");
-            btnPaper2.addClass("hide");
-            btnScissors2.addClass("hide");
             txtEmail.removeClass("hide");
             txtPassword.removeClass("hide");
             btnLogin.removeClass("hide"); 
@@ -118,22 +110,33 @@
         }
     });
 
-    btnRock.on("click", function () {
-        guess = "r";
-        console.log("rock");
-    })
+    function gameStart(){
+        if (currentPlayers.length === 3) {
+            btnLogout.removeClass("hide");
+            btnRock.removeClass("hide");
+            btnPaper.removeClass("hide");
+            btnScissors.removeClass("hide");
+            btnRock2.removeClass("hide");
+            btnPaper2.removeClass("hide");
+            btnScissors2.removeClass("hide");  
+        }else if (currentPlayers.length === 2){
+            btnRock.removeClass("hide");
+            btnPaper.removeClass("hide");
+            btnScissors.removeClass("hide");
+            btnRock2.addClass("hide");
+            btnPaper2.addClass("hide");
+            btnScissors2.addClass("hide");
+            $("#p2").html("CPU");
+        }else if (currentPlayers.length === 1){
+            btnRock.addClass("hide");
+            btnPaper.addClass("hide");
+            btnScissors.addClass("hide");
+            btnRock2.addClass("hide");
+            btnPaper2.addClass("hide");
+            btnScissors2.addClass("hide");
+        }  
+    };
 
-    btnPaper.on("click", function () {
-        guess = "p";
-        console.log("paper");
-    })
-
-    btnScissors.on("click", function () {
-        guess = "s";
-        console.log("scissors");
-    })
-
-    
 
 }());
 
