@@ -28,6 +28,9 @@
     const btnRock = $("#btnRock");
     const btnPaper =$("#btnPaper");
     const btnScissors = $("#btnScissors");
+    const btnRock2 = $("#btnRock2");
+    const btnPaper2 = $("#btnPaper2");
+    const btnScissors2 = $("#btnScissors2");
 
 
 
@@ -86,6 +89,9 @@
             btnRock.removeClass("hide");
             btnPaper.removeClass("hide");
             btnScissors.removeClass("hide");
+            btnRock2.removeClass("hide");
+            btnPaper2.removeClass("hide");
+            btnScissors2.removeClass("hide");
             txtEmail.addClass("hide");
             txtPassword.addClass("hide");
             btnLogin.addClass("hide");
@@ -99,6 +105,9 @@
             btnRock.addClass("hide");
             btnPaper.addClass("hide");
             btnScissors.addClass("hide");
+            btnRock2.addClass("hide");
+            btnPaper2.addClass("hide");
+            btnScissors2.addClass("hide");
             txtEmail.removeClass("hide");
             txtPassword.removeClass("hide");
             btnLogin.removeClass("hide"); 
@@ -120,6 +129,8 @@
         guess = "s";
         console.log("scissors");
     })
+
+    
 
 }());
 

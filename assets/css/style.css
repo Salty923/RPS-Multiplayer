@@ -1,5 +1,8 @@
 body{
-    background: yellow;
+    background: #E6DADA;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #274046, #E6DADA);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #274046, #E6DADA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .row{
@@ -7,8 +10,19 @@ body{
 }
 
 .herobox{
-    height: 300px;
-    width: 300px;
+    height: auto;
+    width: 100%;
+    margin: 10px 0px;
     border-radius: 20%;
+    display: block;
+
 }
 
+button{
+    width: 100px;
+    
+}
+
+input{
+    margin-top: 25px;
+}
