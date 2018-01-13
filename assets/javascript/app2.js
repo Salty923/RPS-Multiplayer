@@ -12,13 +12,21 @@
     };
     firebase.initializeApp(config);
 
+    //create needed variables
     var database = firebase.database();
     var choices =["r","p","s"];
-    var guess;
-    var wins;
-    var losses;
+    var cpu;
+    var cpuChoice;
+    var cpuWins = 0;
+    var cpuLosses = 0;
     var player1;
+    var p1Choice;
+    var p1Wins = 0;
+    var P2Losses = 0;
     var player2;
+    var p2Choice;
+    var p2Wins = 0;
+    var P2Losses =0;
     var currentPlayers =["CPU"];
 
     //match with html lgoin elements
@@ -72,9 +80,18 @@
         });
         //store user to database
         database.ref("users").push({
-            user: email,
-            wins : 0,
-            loses: 0,
+                "one":{
+                    "user": email,
+                    "wins" : 0,
+                    "loses": 0,
+                    "pick" : 0
+                 },
+                 "two":{
+                     "user": email,
+                     "wins": 0,
+                     "loses": 0,
+                     "pick": 0
+                 }
         });
             
     });
@@ -110,6 +127,7 @@
         }
     });
 
+    //add buttons by user number of users
     function gameStart(){
         if (currentPlayers.length === 3) {
             btnLogout.removeClass("hide");
@@ -127,6 +145,7 @@
             btnPaper2.addClass("hide");
             btnScissors2.addClass("hide");
             $("#p2").html("CPU");
+            //add cpu random guess
         }else if (currentPlayers.length === 1){
             btnRock.addClass("hide");
             btnPaper.addClass("hide");
@@ -134,9 +153,8 @@
             btnRock2.addClass("hide");
             btnPaper2.addClass("hide");
             btnScissors2.addClass("hide");
-        }  
+        };
     };
-
 
 }());
 
