@@ -11,8 +11,8 @@ body{
 
 .herobox{
     height: auto;
-    width: 100%;
-    margin: 10px 0px;
+    width: 20%;
+    margin: 10px auto;
     border-radius: 20%;
     display: block;
 
@@ -35,4 +35,11 @@ input{
 
 .btn-info{
     width:90%;
+}
+
+#scroll{
+    background: white;
+    overflow:scroll; 
+    height:200px;
+    border-radius: 10px;
 }
