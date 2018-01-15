@@ -12,10 +12,8 @@ body{
 .herobox{
     height: auto;
     width: 20%;
-    margin: 10px auto;
+    margin: 10px 10px;
     border-radius: 20%;
-    display: block;
-
 }
 
 button{
@@ -40,6 +38,11 @@ input{
 #scroll{
     background: white;
     overflow:scroll; 
-    height:200px;
+    height:150px;
     border-radius: 10px;
+}
+
+img:hover{
+    opacity: .6;
+    border: 3px solid red;
 }

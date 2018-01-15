@@ -10,8 +10,6 @@
         <!-- Bootstrap CSS -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/css/style.css">
-
-       
     </head>
     <body>
         <main>         
@@ -21,31 +19,44 @@
                         <h1 class="text-center">The RPS-Challenge</h1>
                     </div>
                 </div>
-                <div class="row_hide hide">
+                <div class="row row_hide hide">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                         <div class="text-center">
-                            <h2 class="text-center">PLAYER</h2>
+                            <h2 class="text-center"><span id="playerName"></span> Please Pick</h2>
                         </div>
-                        <div>
-                            <img class="herobox" src="assets/images/rock1.jpeg" alt="round rock">
-                            <img class="herobox" src="assets/images/paper1.jpeg" alt="crumpled paper">
-                            <img class="herobox" src="assets/images/scissors1.jpeg" alt="scissors">
+                        <div class="text-center">
+                            <img id="r" class="herobox" src="assets/images/rock1.jpeg" alt="round rock">
+                            <img id="p" class="herobox" src="assets/images/paper1.jpeg" alt="crumpled paper">
+                            <img id="s" class="herobox" src="assets/images/scissors1.jpeg" alt="scissors">
                         </div>
+                    </div>
+                </div>
+                <div class="row row_hide hide">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div id="scroll">
-                            <h3 class="text-center">Scroll the Trolls</h3>
-                            <h4 id="messages"></h4>
+                            <h4 class="text-center">Message Board</h4>
+                            <h5 id="messages"></h5>
                         </div>
                         <div id="waiting">
-                            <h1 class="text-center">Waiting on 2nd player</h1>
+                            <h3 class="text-center">Waiting on 2nd player</h3>
                         </div> 
                     </div>
                 </div> 
-                
-                <div id="signRow" class="row">
+                <div  class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="text-center">
+                        <div id="signRow" class="text-center">
                             <input id="username" type="text" placeholder="type username">
                             <button id="btnLogin" type="button" class="btn btn-large btn-success">PLAY NOW</button>
+                        </div>
+                        <div class="text-center hide row_hide">
+                            <input id="troll" type="text" placeholder="type a message">
+                            <button id="messageSub" type="button" class="btn btn-large btn-success">Send</button>
+                        </div>
+                        <div class="row_hide hide col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <h2 class="text-center" >wins<span id="wins"></span></h2>
+                        </div>
+                        <div class="row_hide hide col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <h2 class="text-center" >Losses<span id="losses"></span></h2>
                         </div>
                     </div>
                 </div>
