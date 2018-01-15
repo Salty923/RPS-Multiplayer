@@ -44,6 +44,8 @@ var db2L = dbplayer2.child("losses");
 var db2T = dbplayer2.child("ties");
 //set this player
 var dbcurrent = 0;
+var p1C;
+var p2C;
 
 
 
@@ -101,20 +103,20 @@ $("#btnLogin").on("click",function () {
 //Player One or two pick rock-set pick to r
 $("#r").on("click", function () {
     if (dbcurrent === 1) {
-        db1C.set("r")
+        db1C.set("r");
+        
     } else if (dbcurrent === 2) {
-        db2C.set("r")
+        db2C.set("r");
     }
     gameLogic();
 });
 
-
 //Player One or two pick paper-set pick to p
 $("#p").on("click", function () {
     if (dbcurrent === 1) {
-        db1C.set("p")
+        db1C.set("p");
     } else if (dbcurrent === 2) {
-        db2C.set("p")
+        db2C.set("p");
     }
     gameLogic();
 });
@@ -122,31 +124,41 @@ $("#p").on("click", function () {
 //Player One or two pick scissors-set pick to s
 $("#s").on("click", function () {
     if (dbcurrent === 1) {
-        db1C.set("s")
+        db1C.set("s");
     } else if (dbcurrent === 2) {
-        db2C.set("s")
+        db2C.set("s");
     }
     gameLogic();
 });
 
+
+
+
+
+
+
+
 function gameLogic() {
-    if (((db1C === "r") && (db2C === "p")) || ((db1C === "p") && (db2C === "s")) || ((db1C === "s") && (db2C === "r"))) {
-        db1L++;
-        db2W++;
-    } else if (((db1C === "r") && (db2C === "s")) || ((db1C === "p") && (db2C === "r")) || ((db1C === "s") && (db2C === "p"))) {
-        db1W++;
-        db2L--;
-    }else{
-        db1T++;
-        db2T++;
+    //get user choices
+    db1C.on("value",function (snapshot) {
+         p1C = snapshot.val();
+      })
+    db2C.on("value",function (snap) {
+         p2C = snap.val();
+    })
+    if (((p1C === "r") && (p2C === "p")) || ((p1C === "p") && (p2C === "s")) || ((p1C === "s") && (p2C === "r"))) {
+        db1L.set("lost");
+    } else if (((p1C === "r") && (p2C === "s")) || ((p1C === "p") && (p2C === "r")) || ((p1C === "s") && (p2C === "p"))) {
+        db1L.set("lost");
+    }else if (p1C === p2C) {
+        alert("tie");
+        db1T.set(db1T.val()+1);
     }
-
-
 };
 
 
 //add presence for removing users on browser close
-var presenceRef1 = firebase.database().ref("users/player1");
+var presenceRef1 = firebase.database().ref("users").child("player1");
 // Write a string when this client loses connection
 presenceRef1.onDisconnect().remove();
 //
