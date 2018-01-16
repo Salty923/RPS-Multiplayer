@@ -122,12 +122,6 @@ $("#messageSub").on("click", function () {
     } else if (dbcurrent === 2) {
         var mes = $("#troll").val();
         dbmessages.push("Player-2:" + mes);
-        var div = $("<h4 class='chat'>");
-        $("#scroll").append(div);
-        dbplayer2.child("message").once("value", function (snapshot) {
-            var snap1 = snapshot.val();
-            $(".chat").html(snap1);
-        });
     }
 });
 
@@ -136,8 +130,16 @@ dbmessages.on("value",function (snapshot) {
     if (snapshot.val() === null) {
         return;
     }
+    $("#scroll").empty();
     var messages = snapshot.val();
-    console.log(messages);
+    var keys = Object.keys(messages);
+    var div = $("<h4 class='chat'>");
+        for (var m = 0; m < keys.length; m++) {
+            var akey = keys[m];
+            $("#scroll").append(div);
+            $(".chat").html(messages[akey]);
+            console.log(messages[akey]);
+        }
  })
 
 
@@ -215,7 +217,7 @@ function gameLogic() {
 
  function uiUpdate() {
      if (dbcurrent === 1) {
-         $("#wins").html(p1W);
+         $("#wins").html(p1W.val());
          $("#losses").html(p1L);
          $("#ties").html(p1T);
      } else if (dbcurrent === 2) {
