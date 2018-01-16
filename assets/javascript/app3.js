@@ -46,6 +46,14 @@ var db2T = dbplayer2.child("ties");
 var dbcurrent = 0;
 var p1C;
 var p2C;
+var p1L = 0;
+var p2L = 0;
+var p1W = 0;
+var p2W = 0;
+var p1T = 0;
+var p2T = 0;
+
+//message board
 
 
 
@@ -100,6 +108,22 @@ $("#btnLogin").on("click",function () {
     })
 });
 
+//send message
+$("#messageSub").on("click", function () {
+    //stop browser refresh
+    event.preventDefault();
+    if(dbcurrent === 1){
+        var mes = $("#troll").val();
+        dbplayer1.child("message").set("Player-1:" + mes);
+
+    } else if (dbcurrent === 2) {
+        var mes = $("#troll").val();
+        dbplayer2.child("message").set("Player-2:" + mes);
+    }
+});
+
+
+
 //Player One or two pick rock-set pick to r
 $("#r").on("click", function () {
     if (dbcurrent === 1) {
@@ -132,12 +156,6 @@ $("#s").on("click", function () {
 });
 
 
-
-
-
-
-
-
 function gameLogic() {
     //get user choices
     db1C.on("value",function (snapshot) {
@@ -147,13 +165,22 @@ function gameLogic() {
          p2C = snap.val();
     })
     if (((p1C === "r") && (p2C === "p")) || ((p1C === "p") && (p2C === "s")) || ((p1C === "s") && (p2C === "r"))) {
-        db1L.set("lost");
+        p1W++;
+        p2L++;
+        db1W.set(p1W);
+        db2L.set(p2L);
     } else if (((p1C === "r") && (p2C === "s")) || ((p1C === "p") && (p2C === "r")) || ((p1C === "s") && (p2C === "p"))) {
-        db1L.set("lost");
+        p2W++;
+        p1L++;
+        db1L.set(p1W);
+        db2W.set(p2L);
     }else if (p1C === p2C) {
-        alert("tie");
-        db1T.set(db1T.val()+1);
+        p1T++;
+        p2T++;
+        db1T.set(p1W);
+        db2T.set(p2L);
     }
+    
 };
 
 
