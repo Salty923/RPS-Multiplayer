@@ -16,6 +16,8 @@ firebase.initializeApp(config);
 var database = firebase.database();
 //connection ref
 var connectedRef = database.ref(".info/connected");
+//messages
+var dbmessages = database.ref("messages");
 //set player depth
 var firstPlayer = true;
 //total players
@@ -88,7 +90,6 @@ $("#btnLogin").on("click",function () {
                     losses: 0,
                     ties:0,
                     pick: "",
-                    message:"",
             })
             dbcurrent = 1;
         } else if (totalPlayers === 1) {
@@ -99,7 +100,6 @@ $("#btnLogin").on("click",function () {
                 losses: 0,
                 ties:0,
                 pick: "",
-                message:"",
             })
             dbcurrent = 2;
         } else {
@@ -112,26 +112,44 @@ $("#btnLogin").on("click",function () {
 $("#messageSub").on("click", function () {
     //stop browser refresh
     event.preventDefault();
+    //create messages storage
+    database.ref("messages");
+    //if player one sends
     if(dbcurrent === 1){
         var mes = $("#troll").val();
-        dbplayer1.child("message").set("Player-1:" + mes);
-
+        dbmessages.push("Player-1:" + mes);
+    //if player two sends
     } else if (dbcurrent === 2) {
         var mes = $("#troll").val();
-        dbplayer2.child("message").set("Player-2:" + mes);
+        dbmessages.push("Player-2:" + mes);
+        var div = $("<h4 class='chat'>");
+        $("#scroll").append(div);
+        dbplayer2.child("message").once("value", function (snapshot) {
+            var snap1 = snapshot.val();
+            $(".chat").html(snap1);
+        });
     }
 });
 
+//listen for messages
+dbmessages.on("value",function (snapshot) { 
+    if (snapshot.val() === null) {
+        return;
+    }
+    var messages = snapshot.val();
+    console.log(messages);
+ })
 
 
 //Player One or two pick rock-set pick to r
 $("#r").on("click", function () {
     if (dbcurrent === 1) {
         db1C.set("r");
-        
     } else if (dbcurrent === 2) {
         db2C.set("r");
     }
+    $(".herobox").addClass("hide");
+    $("#status").html("Waiting on opponent");
     gameLogic();
 });
 
@@ -142,6 +160,8 @@ $("#p").on("click", function () {
     } else if (dbcurrent === 2) {
         db2C.set("p");
     }
+    $(".herobox").addClass("hide");
+    $("#status").html("Waiting on opponent");
     gameLogic();
 });
 
@@ -152,6 +172,8 @@ $("#s").on("click", function () {
     } else if (dbcurrent === 2) {
         db2C.set("s");
     }
+    $(".herobox").addClass("hide");
+    $("#status").html("Waiting on opponent");
     gameLogic();
 });
 
@@ -169,19 +191,41 @@ function gameLogic() {
         p2L++;
         db1W.set(p1W);
         db2L.set(p2L);
+        $(".herobox").removeClass("hide");
+        $("#status").html("Pick Again!");
+        uiUpdate();
     } else if (((p1C === "r") && (p2C === "s")) || ((p1C === "p") && (p2C === "r")) || ((p1C === "s") && (p2C === "p"))) {
         p2W++;
         p1L++;
         db1L.set(p1W);
         db2W.set(p2L);
+        $(".herobox").removeClass("hide");
+        $("#status").html("Pick Again!");
+        uiUpdate();
     }else if (p1C === p2C) {
         p1T++;
         p2T++;
         db1T.set(p1W);
         db2T.set(p2L);
+        $(".herobox").removeClass("hide");
+        $("#status").html("Pick Again!");
+        uiUpdate();
     }
-    
 };
+
+ function uiUpdate() {
+     if (dbcurrent === 1) {
+         $("#wins").html(p1W);
+         $("#losses").html(p1L);
+         $("#ties").html(p1T);
+     } else if (dbcurrent === 2) {
+         $("#wins").html(p2W);
+         $("#losses").html(p2L);
+         $("#ties").html(p2T);
+         $(".herobox").removeClass("hide");
+     }   
+ }
+
 
 
 //add presence for removing users on browser close
@@ -193,4 +237,6 @@ presenceRef1.onDisconnect().remove();
 var presenceRef2 = firebase.database().ref("users/player2");
 // Write a string when this client loses connection
 presenceRef2.onDisconnect().remove();
+
+
  
